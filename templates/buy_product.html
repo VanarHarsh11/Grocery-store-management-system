@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>{{ title }}</title>
+        <link rel="stylesheet" href="../static/buy_product.css">
+    </head>
+    <body>
+        <header>
+            <h3>
+                <div class="header-content">
+                    <div>{{ user_name }}'s Dashboard</div>
+                    <div>Summary | <a href="{{ url_for('logout') }}" class="logout-link">Logout</a></div>
+                </div>
+            </h3>
+        </header>
+        <hr> <!--a horizontal line seperating header and webpage-->
+        <h3 style="text-decoration: none; font-size: x-large;">
+            {{ product_name}} - {{ category_name }}
+        </h3>
+        <div class="form" style="text-align: left;margin-left: 30%;">
+            <form method="POST">
+                <p>Quantity : <input type="number" id="quantity_given" name="quantity_given" placeholder="Quantity available : {{ quantity }}" required 
+                    style="padding: 10px;font-size: 15px;"> {{ unit }}
+                </p>
+                <p>Price per {{ unit }} : {{ rate }} Rs</p>
+                <p><button type="button" id="proceed-button"
+                style="padding: 6px 10px;
+                    border-radius: 8px;
+                    text-align: center;">Proceed</button></p>
+                <p id="result"></p>
+                <p><button type="submit" id="buybutton"
+                    style="padding: 6px 10px;
+                        display: none;
+                        border-radius: 8px;
+                        text-align: center;">{{ function }}</button></p>
+            </form>
+        </div>
+
+        <div>
+            <a href="{{ url_for('user_dashboard', username=user_name) }}">Go back</a>
+        </div>
+
+
+
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function(){
+                const proceedButton = document.getElementById("proceed-button");
+                const resultpara = document.getElementById("result");
+                const rate1 = {{ rate }};
+                const maxq = {{ quantity }};
+                const buybutton = document.getElementById("buybutton");
+
+                proceedButton.addEventListener("click", function(){
+                    const inputnumber = parseFloat(document.getElementById("quantity_given").value);
+                    if(inputnumber<=maxq && inputnumber>0){
+                        if(!isNaN(inputnumber)){
+                            const total = inputnumber * rate1;
+                            resultpara.textContent = `Total : ${total} Rs`
+                            buybutton.style.display = 'block';
+                        }
+                        else{
+                            resultpara.textContent = `Enter proper value`;
+                        }
+                        
+                    }
+                    else if(inputnumber > maxq){
+                        resultpara.textContent = `Provided value is more than stock available (${maxq})`;
+                        buybutton.style.display = 'none';
+                    }
+                    else{
+                        resultpara.textContent = `Provide some value`;
+                        buybutton.style.display = 'none';
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

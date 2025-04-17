@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>User Dashboard</title>
+        <link rel="stylesheet" href="../static/user_dashboard.css">
+    </head>
+    <body>
+        <header>
+            <h3>
+                <div class="header-content">
+                    <div>{{ user_name }}'s Dashboard</div>
+                    <div>Summary | <a href="{{ url_for('logout') }}" class="logout-link">Logout</a></div>
+                </div>
+            </h3>
+        </header>
+        <hr> <!--a horizontal line seperating header and webpage-->
+        <div id="category-list" class="category-list">
+            {% if category %}
+            <ul>
+                {% for item in category %}
+                    <div class="category-box" id="category-box">
+                        <div>{{ item }}</div>
+                        <br>
+                        {% if product_dict %}
+                            <div>
+                                {% for p in product_dict %}
+                                    <!-- <div style="text-align: center;">→{{ p }}</div> -->
+                                    {% if p == item %}
+                                        {% for x in product_dict[p] %}
+                                            {% if x|length != 0 %}
+                                                <ul class="product-list"><li>{{ x }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </li>
+                                                <li><button>buy</button></li>
+                                                </ul>
+                                            {% endif %}
+                                    {% else %}
+                                        <div>No products created</div><br>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div><br>
+                        {% endif %}
+                        
+                        <br>
+                    </div>
+                    <br>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <div id="text" class="text">No categories or product created</div>
+            {% endif %}
+        </div>
+    </body>
+</html>

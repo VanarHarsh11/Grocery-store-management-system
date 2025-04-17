@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>User Dashboard</title>
+        <link rel="stylesheet" href="../static/user_dashboard.css">
+    </head>
+    <body>
+        <header>
+            <h3>
+                <div class="header-content">
+                    <div>{{ user_name }}'s Dashboard</div>
+                    <div>Summary 
+                        | <a href="{{ url_for('review_cart',username=user_name) }}">Cart</a> | 
+                        <a href="{{ url_for('logout') }}" class="logout-link">Logout</a></div>
+                </div>
+            </h3>
+        </header>
+        <hr> <!--a horizontal line seperating header and webpage-->
+        <div id="category-list" class="category-list">
+            {% if category %}
+            <ul>
+                {% for item in category %}
+                    <div class="category-box" id="category-box">
+                        <div>{{ item }}</div>
+                        <br>
+                        {% if product_dict %}
+                            {% for p in product_dict %}
+                                {% if p == item %}
+                                    {% for x in stock %}
+                                        {% if x.category_name == item %}
+                                        <ul class="product-list"><li>{{ x.product_name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ x.rate_per_unit }} Rs/{{ x.unit }}</li>
+                                            <li><a href="{{ url_for('buy_product', product_name=x.product_name, category_name=item, username=user_name) }}"><button class="buy-button">Buy</button></a>&nbsp;&nbsp;&nbsp;
+                                                
+                                                <a href="{{ url_for('addto_cart', product_name=x.product_name, category_name=item, username=user_name) }}"><button class="cart-button"><img src="../static/cart.png"></button></a>
+                                            </li>
+                                        </ul>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        <br>
+                    </div>
+                    <br>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <div id="text" class="text">No categories or product created</div>
+            {% endif %}
+        </div>
+    </body>
+</html>

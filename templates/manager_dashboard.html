@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Manager Dashboard</title>
+        <link rel="stylesheet" href="../static/manager_dashboard.css">
+    </head>
+    <body>
+        <header>
+            <h3>
+                <div class="header-content">
+                    <div>{{ manager_user_name }}'s Dashboard</div>
+                    <div>Summary | <a href="{{ url_for('logout') }}" class="logout-link">Logout</a></div>
+                </div>
+            </h3>
+        </header>
+        <hr> <!--a horizontal line seperating header and webpage-->
+        
+        <a href="#" class="pluss-button" id="plus-button">+</a>
+        
+        <div id="category-list" class="category-list">
+            {% if category %}
+            <ul>
+                {% for item in category %}
+                    <div class="category-box" id="category-box">
+                        <div><b>{{ item }}</b></div>
+                        <br>
+                        {% if product_dict %}
+                            <div>
+                                {% for p in product_dict %}
+                                    <!-- <div style="text-align: center;">→{{ p }}</div> -->
+                                    {% if p == item %}
+                                        {% for x in product_dict[p] %}
+                                            {% if x|length != 0 %}
+                                                <!-- <ul style="text-align: left; padding-right: 10px;">{{ x }}</ul> -->
+                                                {% for l in prod_full %}
+                                                {% if l.product_name==x %}
+                                                <ul style="text-align: left; padding-right: 10px;"><li>{{ x }}</li>
+                                                    <a href="{{ url_for('edit_product', prdct_name=x, prdct_id=l.p_id) }}"><button class="edit-del-button">Edit</button></a>
+                                                    <a href="{{ url_for('delete_product', prdct_name=x, prdct_id=l.p_id) }}"><button class="edit-del-button">Delete</button></a>
+                                                    <br><br>
+                                                </ul>
+                                                {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                    {% else %}
+                                        <div>No products created</div><br>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div><br>
+                        {% endif %}
+                        <center><a href="{{ url_for('add_product', category_name=item) }}" class="product-button" id="product-button">+</a></center>
+                        <br>
+                        <center>
+                            {% for x in cat_full %}
+                                {% if x.category_name == item %}
+                            <a href="{{ url_for('edit_category', category_name=item, category_id=x.c_id) }}"><button class="edit-del-button">Edit</button></a>
+                            <a href="{{ url_for('delete_category',category_name=item, category_id=x.c_id) }}"><button class="edit-del-button">Delete</button></a>
+                            {% endif %}
+                            {% endfor %}
+                        </center>
+                    </div>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <div id="text" class="text">No categories or product created</div>
+            {% endif %}
+        </div>
+        <!-- form to add category -->
+        <form method="POST" action="/add-category"  id="form-container" class="form-container">
+            <h3>Creating a new category.</h3>
+            <br><br>
+            <div style="text-align: center;">
+                Category name: <input type="text" name="category_name" required>
+                <br><br>
+                <a href="{{ url_for('add_category') }}"><button id="save-categoryname">Save</button></a>
+            </div>
+        </form>
+
+        
+
+
+        <script src="../static/manager_dashboard.js"></script>
+
+    </body>
+</html>

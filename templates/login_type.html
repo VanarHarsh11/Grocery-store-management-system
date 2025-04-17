@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Login Type</title>
+        <style>
+            button{
+                padding: 15px 30px;
+                font-size: 18px;
+                margin-right: 20px;
+            }
+        </style>
+    </head>
+    <body style="text-align: center;">
+        <h1>Select proper option : </h1>
+        <a href="{{ url_for('login', type='manager') }}"><button>Manager</button></a>
+        <a href="{{ url_for('login', type='user') }}"><button>User</button></a>
+        
+
+    </body>
+</html>

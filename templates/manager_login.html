@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Manager Login</title>
+        <style>
+            .container{
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                height: fit-content;
+                width: fit-content;
+                padding: 15px 30px;
+                border: 2px solid black;
+            }
+            #login_button{
+                padding: 8px 15px;
+                border-radius: 8px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="text-align: center;">Manager login</h1>
+        <div class="container">
+            <!-- <form method="POST" action="{{ url_for('login',type='manager') }}"> -->
+            <form method="POST">
+                <div id="username">
+                    <p style="text-align: left;">Username</p>
+                    <input type="text" name="manager_user_name" required>
+                </div>
+                <div id="password">
+                    <p style="text-align: left;">Password</p>
+                    <input type="password" name="manager_password" required>
+                </div>
+                <br>
+                <div>
+                    <button type="submit" id="login_button">Login</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Edit Product</title>
+</head>
+
+<body style="margin-left: 30%;">
+    <h3 style="margin-left: 20%;">Current</h3>
+    <ul>
+        <li>Product name : {{ oldprdct_name }}</li>
+        <li>Rate/unit : {{ rate }}</li>
+        <li>Quantity : {{ quantity }}</li>
+    </ul>
+    <form method="POST">
+        <ul>
+            <li>
+                <p>New Product name : <input type="text" name="newname" value="{{ oldprdct_name }}" required></p>
+            </li>
+            <li>
+                <p>New Rate/unit : <input type="number" name="newrate" value="{{ rate }}" required></p>
+            </li>
+            <li>
+                <p>Add Quantity here : <input type="number" name="new_quantity" value="0"></p>
+            </li>
+        </ul>
+        <div>
+            <p>Date : todays date</p>
+        </div>
+        <p><button type="submit" style="margin-left: 20%;
+                    padding: 6px 10px;
+                    border-radius: 8px;
+                    ">Save</button></p>
+
+    </form>
+
+</body>
+
+</html>

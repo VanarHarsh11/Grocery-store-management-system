@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>User Login</title>
+        <style>
+            .container{
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                height: fit-content;
+                width: fit-content;
+                padding: 15px 30px;
+                border: 2px solid black;
+            }
+            #login-button{
+                padding: 8px 15px;
+                border-radius: 8px;
+                text-align: center;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1 style="text-align: center;">User login</h1>
+        <div class="container">
+            <form method="POST">
+                <div id="username">
+                    <p style="text-align: left;">Username</p>
+                    <input type="text" name="user_user_name" required>
+                </div>
+                <div id="password">
+                    <p style="text-align: left;">Password</p>
+                    <input type="password" name="user_password" required>
+                </div>
+                <br>
+                    <a href="{{ url_for('login',type='user') }}"><button type="submit" id="login-button">Proceed</button></a>
+            </form>
+        </div>
+    </body>
+</html>
+
+
+
+

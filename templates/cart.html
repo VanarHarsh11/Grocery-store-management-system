@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>User Cart</title>
+        <link rel="stylesheet" href="../static/cart.css">
+    </head>
+    <body>
+        <header>
+            <h3>
+                <div class="header-content">
+                    <div>{{ user_name }}'s Cart</div>
+                    <div>Summary |
+                        <a href="{{ url_for('user_dashboard',username=user_name) }}">Home</a> | 
+                        <a href="{{ url_for('logout') }}" class="logout-link">Logout</a></div>
+                </div>
+            </h3>
+        </header>
+        <hr> <!--a horizontal line seperating header and webpage-->
+
+        <div class="list">
+            {% if cart %}
+                {% for i in cart %}
+                    <div class="list-box">
+                        <div class="list-box-details">
+                            <table id="stock-table">
+                                <tr>
+                                    <td style="width: 350px;;">
+                                        {{ i.category_name }}-{{ i.product_name }}
+                                    </td>
+                                    <td style="width: 350px;text-align: center;">
+                                        {{ i.quantity }} {{ i.unit }}
+                                    </td>
+                                    <td style="width: 233px;">
+                                        {{ i.rate_per_unit }} Rs/{{ i.unit }}
+                                    </td>
+                                    <td style="width: 200px;text-align: center;">
+                                        {{ i.price_total }}
+                                    </td>
+                                    <td style="width: 233px;text-align: right;">
+                                        <a href="{{ url_for('update_cart',
+                                            product_name = i.product_name,
+                                            username = i.u_name,
+                                            category_name = i.category_name)
+                                            }}"><button>Review</button></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% else %}
+                    <div style="text-align: center;margin-top: 20%;"><b>Your cart is empty</b></div>
+            {% endif %}
+        </div>
+        <h3><p class="total">Total : {{ total_price }} </p></h3>
+        <a href="{{ url_for('checkout', user_name=user_name) }}" class="checkout">Buy All</a>
+    </body>
+
+</html>

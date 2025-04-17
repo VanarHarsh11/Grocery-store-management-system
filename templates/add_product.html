@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Manager Dashboard</title>
+    <!-- <link rel="stylesheet" href="../static/manager_dashboard.css"> -->
+</head>
+
+<body>
+    <form method="POST" id="prdct-form-container" class="prdct-form-container">
+        <h3>Creating a new product.</h3>
+        <br><br>
+        <div class="prdct-details" id="prdct-details">
+            <p>
+                <label for="catname_for_prdct">Category name: </label>
+                <!-- <select name="catname_for_prdct" id="catname_for_prdct">
+                        {% if category %}
+                            {% for item in category %}
+                                <option value="{{ item }}">{{ item }}</option>
+                            {% endfor %}
+                        {% endif %}
+                    </select> -->
+                {{ category_name }}
+            </p>
+            <p>
+                Product name: <input type="text" name="product_name" placeholder="Enter product name" required>
+            </p>
+            <p>
+                <label for="unit">Unit: </label>
+                <select name="unit" id="unit">
+                    <option value="kg">kg</option>
+                    <option value="litre">litre</option>
+                    <option value="dozen">dozen</option>
+                    <option value="gram">gram</option>
+                    <option value="piece">piece</option>
+                </select>
+            </p>
+            <p>
+                <label for="rate_per_unit">Rate/unit: </label> <input type="number" name="rate_per_unit">
+            </p>
+            <p>
+                <label for="quantity">Quantity: </label> <input type="number" name="quantity">
+            </p>
+            
+            <a href="{{ url_for('add_product') }}"><button id="save-productname">Save</button></a>
+
+            <br><br>
+
+            <a href="{{ url_for('manager_dashboard') }}" class="go-back">Go back</a>
+        </div>
+    </form>
+</body>
+
+</html>
